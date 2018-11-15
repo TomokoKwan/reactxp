@@ -15,6 +15,7 @@ const buildConfig = (env, argv) => ({
   output: {
     filename: 'bundle.js',
     path: DIST_PATH,
+    publicPath: '/'
   },
 
   resolve: {
@@ -24,7 +25,9 @@ const buildConfig = (env, argv) => ({
   module: {
     rules: [{ test: /\.tsx?$/, loader: 'babel-loader', include: APP_PATH }],
   },
-
+  devServer: {
+    historyApiFallback: true,
+  },
   plugins: [
     new webpack.DefinePlugin({ __DEV__: argv.mode === 'development' }),
     new HtmlWebpackPlugin({ inject: true, template: path.join(WEB_PATH, 'template.html') }),

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as RX from 'reactxp';
 import { DEBUG, DEV	} from './config';
-import { RootView } from './views/RootView';
+import { RootViewWithRoutes } from './views/RootViewWithRoutes';
 
 class App {
     init() {
@@ -11,7 +11,7 @@ class App {
 
     private _renderRootView() {
         return (
-            <RootView />
+            <RootViewWithRoutes />
         );
     }
 }

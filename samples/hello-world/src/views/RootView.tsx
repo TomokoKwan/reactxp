@@ -4,10 +4,12 @@ import Navigator, { NavigatorDelegateSelector as DelegateSelector, Types } from 
 
 import { MainPanel } from './MainPanel';
 import { SecondPanel } from './SecondPanel';
+import NoAdminAccess from './NoAdminAccess';
 
 enum NavigationRouteId {
     MainPanel,
-    SecondPanel
+    SecondPanel,
+    NoAdminAccess
 }
 
 const styles = {
@@ -53,7 +55,11 @@ export class RootView extends RX.Component<RX.CommonProps, RX.Stateless> {
 
             case NavigationRouteId.SecondPanel:
                 return (
-                    <SecondPanel onNavigateBack={ this._onPressBack } />
+                    <SecondPanel onNavigateBack={ this._onPressToNoAdminAccess } />
+                );
+            case NavigationRouteId.NoAdminAccess:
+                return (
+                    <NoAdminAccess />
                 );
         }
 
@@ -69,9 +75,18 @@ export class RootView extends RX.Component<RX.CommonProps, RX.Stateless> {
         }
     }
 
-    private _onPressBack = () => {
+    private _onPressToNoAdminAccess = () => {
         if (this._navigator) {
-            this._navigator.pop();
+            this._navigator.push({
+                sceneConfigType: Types.NavigatorSceneConfigType.FloatFromRight,
+                routeId: NavigationRouteId.NoAdminAccess
+            });
         }
     }
+
+    // private _onPressBack = () => {
+    //     if (this._navigator) {
+    //         this._navigator.pop();
+    //     }
+    // }
 }
